@@ -36,6 +36,12 @@ EU (Ireland) | [![Launch AWS Security Workshop in eu-west-1](http://docs.aws.ama
 Asia Pacific (Tokyo) | [![Launch AWS Security Workshop in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=aws-security-workshop&templateURL=https://s3-eu-west-1.amazonaws.com/cjl-cloudformation-stack-templates/application_deployment.yaml)
 Asia Pacific (Sydney) | [![Launch AWS Security Workshop in ap-southeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=aws-security-workshop&templateURL=https://s3-eu-west-1.amazonaws.com/cjl-cloudformation-stack-templates/application_deployment.yaml)
 
+## DVWA configuration
+
+Once the stack has successfully deployed we need to login and do the intial database population. From the CloudFormation click the checkbox for the stack "aws-security-workshop" and in the ribbon below select "Output". Here you will find the URL for the DVWA.
+
+![DVWA URL](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa_url.png)
+
 ## Modules
 
 There are four modules aligned to a common IT security lifecycle model.
