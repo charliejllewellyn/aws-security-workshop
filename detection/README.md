@@ -136,9 +136,19 @@ We are now going to force a compliance breach by updating the rule to allow port
 In this section we're going to review the results we get from GuardDuty. In order to start processing events with GuardDuty we need to enable the service.
 
 <details>
-<summary><strong>Check the Compliance breach (expand for details)</strong></summary>
+<summary><strong>Setup AWS GuardDuty (expand for details)</strong></summary>
 
 1. In the AWS Console open the Guard Duty Service
 
 1. Select **Get Started** and then **Enable GuardDuty**.
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)
+
+1. In this example we're going to generate some sample findings. Click **Settings** on the left hand menu and then **Generate sample findings**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)
+
+</details>
+
+<details>
+<summary><strong>Evaluate the events (expand for details)</strong></summary>
+</details>
+
