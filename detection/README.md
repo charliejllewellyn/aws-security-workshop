@@ -77,12 +77,13 @@ We are now going to make one of our resources breach compliance.
 1. Click **Edit** then click **Add Rule**
 
 1. Use the following rule configuration:
-2. **Type** - Custom TCP
-3. **Protocol** - TCP
-4. **Port Range** - 3389
-5. **Source** Anywhere
-6. **Description** RDesktop for everything
-    ![new sg rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
+..1. **Type** - Custom TCP
+..2. **Protocol** - TCP
+..3. **Port Range** - 3389
+..4. **Source** Anywhere
+..5. **Description** RDesktop for everything
+
+(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
 
 1. Click **Save**
 
