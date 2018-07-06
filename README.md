@@ -48,8 +48,10 @@ Copy this url to your browser and click the "Create / Reset database" button at 
 
 Login with:
 
+```
 Username: admin
 Password: password
+```
 
 ## Modules
 
