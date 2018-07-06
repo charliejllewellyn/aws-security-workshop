@@ -64,10 +64,10 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 1. Update the **Name** to identify it as part of the workshop, **security-workshop-restricted-common-ports**
     ![name rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-name.png)
 
-1. Under **Scope of changes**, select **Tags** and enter **ProjectName** as the **Tag Key** and **Securityworkshop** as the **Tag Value**. This will restrict the rule to only run against the resources we have created in the workshop.
-
 1. We shall leave the Trigger section as it is in this case. For creating custom rules where a smaller sub-section of a particular resource should be monitored, or where a periodic check is desired then these [options should be revisited].(https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html)
 AWS have [a repository of custom rules here].(https://github.com/awslabs/aws-config-rules)
+
+1. Under **Scope of changes**, select **Tags** and enter **ProjectName** as the **Tag Key** and **Securityworkshop** as the **Tag Value**. This will restrict the rule to only run against the resources we have created in the workshop.
     ![trigger config](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-trigger-config.png)
 
 1. Under **Rule parameters** we want to change **blockedPort3** from 3389 to **80**. The Rule parameters in this case are the TCP ports which should not be permitted. If these rules are added to a security group then the resource will be in breach of compliance.
