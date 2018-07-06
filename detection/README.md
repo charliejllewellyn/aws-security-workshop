@@ -6,7 +6,25 @@ In this module we will explore practices and products to detect changes and secu
 
 ## Notification
 
-Since a large part of detection is notify systems and teams about events we'll start by setting up a notification topic
+Since a large part of detection is notify systems and teams about events we'll start by setting up a notification topic.
+
+<details>
+<summary><strong>Setup Amazon SNS</strong></summary><p>
+
+1. From the AWS Console open the SNS dashboard.
+
+1. Click **Create Topic**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/SNS_topic.png)
+
+1. For the **Topic Name** enter **SecurityWorkshopEvents** and click **Create Topic**
+
+1. Click **Create subscription**
+
+1. Change the **protocol** to **Email** and enter your email address, click **Create subscription**
+
+1. Check your email and click the confirmation to complete the topic setup
+
+</details>
 
 ## Configuration State
 
@@ -33,9 +51,7 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 
 1. Check the tick box beside **Stream configuration changes and notifications to an Amazon SNS topic.**
 
-1. Let Config create the topic and choose a name which matches the naming policy for your organisation
-
-    ![config topic](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-topic.png)
+1. Choose **Choose a topic from your account** and select the SNS topic create above **SecurityWorkshopEvents**.
 
 1. Let Config create a role for you. Choose a name which matches the naming policy for your organisation
 
@@ -177,6 +193,7 @@ and select **Plaintext** for the **Format**, finally check **I agree** and click
 1. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
 
 1. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_ec2_host.png)
 
 1. Open an SSH terminal and run
 
