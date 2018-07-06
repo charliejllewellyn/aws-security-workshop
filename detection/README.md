@@ -18,12 +18,12 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 1. In the AWS Console open the Config service, ensuring that you have selected a region where the items you wish to monitor are present
 
 1. Press **Get started**
-    ![get started](config-get-started.png)
+    ![get started](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-get-started.png)
 
 1. The defaults are useful here but we shall add in monitoring of Identity and Access Management resources (IAM)
 
 1. Under **Resource types to record** check the tick box beside **Include global resources (e.g. AWS IAM resource)**
-    ![config settings](config-settings.png)
+    ![config settings](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-settings.png)
 
 1. We shall let Config create the Amazon S3 bucket for us but we shall add in Amazon SNS notification of changes
 
@@ -31,21 +31,21 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 
 1. Let Config create the topic and choose a name which matches the naming policy for your organisation
 
-    ![config topic](config-topic.png)
+    ![config topic](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-topic.png)
 
 1. Let Config create a role for you. Choose a name which matches the naming policy for your organisation
 
-    ![config role](config-role.png)
+    ![config role](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-role.png)
 
 1. Press **Next**
 
 1. We will not choose any default rules to apply yet, so press **Next**
 
 1. On the **Review** screen check that you are satisfied and press **Confirm** if so. If not, press **Previous** to go back a screen and make changes to your satisfaction.
-    ![config confirm](config-confirm.png)
+    ![config confirm](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-confirm.png)
 
 1. After a short period of time, Config will be setup and you will be brought to the dashboard
-    ![config dashboard](config-dash.png)
+    ![config dashboard](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-dash.png)
 
 </p></details>
 
