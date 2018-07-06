@@ -6,6 +6,41 @@ In this module we will look at some practices and products that can be used to e
 
 We'll use the following products to demonstrate these methods, S3, Identity and access managment, AWS Certificate Manager, Application load balancer, Web application firewall.
 
+## Identity and Access Managment (IAM)
+AWS Identity and Access Management (IAM) is a web service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
+
+When you first create an AWS account, you begin with a single sign-in identity that has complete access to all AWS services and resources in the account. This identity is called the AWS account root user and is accessed by signing in with the email address and password that you used to create the account. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones. Instead, adhere to the best practice of using the root user only to create your first IAM user. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks. [1]
+
+[1] - https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html
+
+First we will need to create an IAM User:- 
+
+To create an administrator user for yourself and add the user to an administrators group (console)
+
+1. Use your AWS account email address and password to sign in as the AWS account root user to the IAM console at https://console.aws.amazon.com/iam/.
+
+1. In the navigation pane, choose Users and then choose Add user.
+1. For User name, type a user name, such as Administrator. The name can consist of letters, digits, and the following characters: plus (+), equal (=), comma (,), period (.), at (@), underscore (_), and hyphen (-). The name is not case sensitive and can be a maximum of 64 characters in length.
+
+1. Select the check box next to AWS Management Console access, select Custom password, and then type your new password in the text box. If you're creating the user for someone other than yourself, you can optionally select Require password reset to force the user to create a new password when first signing in.
+
+1. Choose Next: Permissions.
+
+1. On the Set permissions for user page, choose Add user to group.
+
+1. Choose Create group.
+
+1. In the Create group dialog box, type the name for the new group. The name can consist of letters, digits, and the following characters: plus (+), equal (=), comma (,), period (.), at (@), underscore (_), and hyphen (-). The name is not case sensitive and can be a maximum of 128 characters in length.
+
+1. In the policy list, select the check box next to AdministratorAccess. Then choose Create group.
+
+1.  Back in the list of groups, select the check box for your new group. Choose Refresh if necessary to see the group in the list.
+
+1. Choose Next: Review to see the list of group memberships to be added to the new user. When you are ready to proceed, choose Create user.
+
+
+
+
 ## Encryption
 
 A good best practice is to use both encryption in transit and encryption at rest. Whilst the details about how to enforce this may change between AWS products the approach to protect data remains consistent.
