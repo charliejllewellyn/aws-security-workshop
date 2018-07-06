@@ -31,16 +31,17 @@ PUT INITIAL CONFIG SETUP IN HERE
 1. Type **security group** in the search field and click the **restricted-common-ports** boxout which appears
     ![restrict ports](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/restricted-common-ports.png)
 
-1. Give the rule a name which fits the naming pattern in use at your organisation and a helpful description.
+1. Update the **Name** to identify it as part of the workshop, **security-workshop-restricted-common-ports**
     ![name rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-name.png)
+
+1. Under **Scope of changes**, select **Tags** and enter **ProjectName** as the **Tag Key** and **Securityworkshop** as the **Tag Value**. This will restrict the rule to only run against the resources we have created in the workshop.
 
 1. We shall leave the Trigger section as it is in this case. For creating custom rules where a smaller sub-section of a particular resource should be monitored, or where a periodic check is desired then these [options should be revisited].(https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html)
 AWS have [a repository of custom rules here].(https://github.com/awslabs/aws-config-rules)
     ![trigger config](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-trigger-config.png)
 
-1. The Rule parameters in this case are the TCP ports which should not be permitted. If these rules are added to a security group then the resource will be in breach of compliance.
+1. Under **Rule parameters** we want to change **blockedPort3** from 3389 to **80**. The Rule parameters in this case are the TCP ports which should not be permitted. If these rules are added to a security group then the resource will be in breach of compliance.
     ![ports to avoid](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-port-config.png)
-
 
 1. Click **Save**.
 
@@ -51,42 +52,31 @@ AWS have [a repository of custom rules here].(https://github.com/awslabs/aws-con
 
 You will now see the Rules section once more, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
 
-![rule evaluation](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-evaluating.png)
+Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Noncompliant**. You can click the **Refresh** icon if you do not see the page update.
 
-Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Compliant**. You can click the **Refresh** icon if you do not see the page update.
+To see the state of the Security Groups which are being monitored for compliance, click the rule name. In our example here that is **security-workshop-restricted-common-ports**.
 
-To see the state of the Security Groups which are being monitored for compliance, click the rule name. In our example here that is **myOrg-security-groups-restrict-common-ports**.
-
-![compliant rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-compliant.png)
-
-You will now see that we have two groups in compliance.
-![compliant groups](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-detail-compliant.png)
+![Noncompliant rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_non-compliant.png)
 
 </p></details>
 
 ### Testing the compliance state
 
-We are now going to make one of our resources breach compliance.
+We are now going to manually remediate the rules to make sure we no longer allow port 80 through to our application since we have enabled SSL.
 
 <details>
 <summary><strong>Change a security group (expand for details)</strong></summary><p>
 
 1. In the AWS Console open the EC2 service and select **Security Groups** from the left hand menu
 
-1. Place a check next to the **Group ID** for the Security Group you want to update
-    ![sg list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-list.png)
+1. Place a check next to the **Group ID** for the **securityImmersionDay-loadBalancer**, for example
+    ![sg list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_amend.png)
 
 1. Click **Inbound** in the ribbon below
 
 1. Click **Edit** then click **Add Rule**
 
-1. Use the following rule configuration:
-  * **Type** - Custom TCP
-  * **Protocol** - TCP
-  * **Port Range** - 3389
-  * **Source** Anywhere
-  * **Description** RDesktop for everything
-
+1. Delete the **HTTP** rule by clicking the cross to the right and save the config.
 ![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
 
 1. Click **Save**
@@ -97,10 +87,10 @@ We are now going to make one of our resources breach compliance.
 
 1. In the AWS Console open the Config Service
 
-1. After a short period of time the Compliance state of the **myOrg-security-groups-restrict-common-ports** rule will change to **1 noncompliant resource(s)**
-    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-list.png)
+1. After a short period of time the Compliance state of the **security-workshop-restricted-common-ports** rule will change to **compliant resource(s)**
+    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/compliant-rule-list.png)
 
-1. Click on the **myOrg-security-groups-restrict-common-ports** rule name
+1. Click on the **security-workshop-restricted-common-ports** rule name
 
 1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the **NonCompliant** resource
     ![sg rule shortlist](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-shortlist.png)
