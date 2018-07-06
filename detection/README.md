@@ -80,7 +80,7 @@ AWS have [a repository of custom rules here](https://github.com/awslabs/aws-conf
 <details>
 <summary><strong>Viewing the compliance state (expand for details)</strong></summary><p>
 
-You will now see the Rules section once more, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
+You will now see the Rules section, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
 
 Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Noncompliant**. You can click the **Refresh** icon if you do not see the page update.
 
@@ -107,7 +107,7 @@ We are now going to manually remediate the rules to make sure we no longer allow
 1. Click **Edit** then click **Add Rule**
 
 1. Delete the **HTTP** rule by clicking the cross to the right and save the config.
-![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
+![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_delete.png)
 
 1. Click **Save**
 
