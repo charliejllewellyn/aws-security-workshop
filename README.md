@@ -63,6 +63,10 @@ Username: admin
 Password: password
 ```
 
+In the left hand menu select **DVWA Security**, in the dropdown select **Low** and click **Submit**.
+
+![DVWA Security](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa_security.png)
+
 ## Modules
 
 There are four modules aligned to a common IT security lifecycle model.

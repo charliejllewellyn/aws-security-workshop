@@ -130,3 +130,11 @@ If we now request encryption as part of the upload we'll see we can successfully
 ```
 aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/ --sse
 ```
+
+## Web Application Firewall
+
+In this section we are going to use the [AWS Web Application Firewall](https://aws.amazon.com/waf/) to prevent SQL injection attacks against our site.
+
+First we'll prove the vulnerability in DVWA. Browse to the site now served over HTTPS and select **SQL Injection** form the menu on the left.
+
+
