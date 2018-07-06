@@ -21,8 +21,7 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 
 1. Select **Rules** from the left hand menu
 
-1. Press the **Add rule** button
-    ![add rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/add-rule.png)
+1. Press the **Add rule** button ![add rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/add-rule.png)
 
 1. Type **security group** in the search field and click the **restricted-common-ports** boxout which appears
     ![restrict ports](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/restricted-common-ports.png)
@@ -47,16 +46,16 @@ AWS have [a repository of custom rules here].(https://github.com/awslabs/aws-con
 
 You will now see the Rules section once more, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
 
-(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-evaluating.png)
+![rule evaluation](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-evaluating.png)
 
 Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Compliant**. You can click the **Refresh** icon if you do not see the page update.
 
 To see the state of the Security Groups which are being monitored for compliance, click the rule name. In our example here that is **myOrg-security-groups-restrict-common-ports**.
 
-(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-compliant.png)
+![compliant rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-compliant.png)
 
 You will now see that we have two groups in compliance.
-(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-detail-compliant.png)
+![compliant groups](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-detail-compliant.png)
 
 </p></details>
 
@@ -77,11 +76,11 @@ We are now going to make one of our resources breach compliance.
 1. Click **Edit** then click **Add Rule**
 
 1. Use the following rule configuration:
-..1. **Type** - Custom TCP
-..2. **Protocol** - TCP
-..3. **Port Range** - 3389
-..4. **Source** Anywhere
-..5. **Description** RDesktop for everything
+  * **Type** - Custom TCP
+  * **Protocol** - TCP
+  * **Port Range** - 3389
+  * **Source** Anywhere
+  * **Description** RDesktop for everything
 
 (https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
 
@@ -108,3 +107,4 @@ We are now going to make one of our resources breach compliance.
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/sg-rule-change.png)
 
 </details>
+ 
