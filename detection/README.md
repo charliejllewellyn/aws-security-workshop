@@ -117,12 +117,12 @@ We are now going to manually remediate the rules to make sure we no longer allow
 
 1. In the AWS Console open the Config Service
 
-1. After a short period of time the Compliance state of the **security-workshop-restricted-common-ports** rule will change to **compliant resource(s)**
-    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/compliant-rule-list.png)
+1. After a short period of time the Compliance state of the **security-workshop-restricted-common-ports** rule will change to **Compliant**
+    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_compliant.png)
 
 1. Click on the **security-workshop-restricted-common-ports** rule name
 
-1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the **NonCompliant** resource
+1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the now **Compliant** loadbalancer security group rule
     ![sg rule shortlist](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-shortlist.png)
 
 1. Notice the timeline which shows the changes made to the Security Group
