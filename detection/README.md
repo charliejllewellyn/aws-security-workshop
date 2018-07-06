@@ -2,7 +2,11 @@
 
 Whilst prevention is a vital part of the security within AWS prevention also has the potential to impede good work slowing down delivering and frustrating users. Security teams need to be aware of when prevention is appropriate and when detection may be a better methods to track security across an organisation.
 
-In this module we will explore practices and products to detect changes and security threats and how rto generate alerts on that basis. In this module we will use [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
+In this module we will explore practices and products to detect changes and security threats and how rto generate alerts on that basis. In this module we will use [Amazon Simple Notification Service](https://aws.amazon.com/sns/), [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
+
+## Notification
+
+Since a large part of detection is notify systems and teams about events we'll start by setting up a notification topic
 
 ## Configuration State
 
@@ -170,11 +174,26 @@ and select **Plaintext** for the **Format**, finally check **I agree** and click
 
 1. We are now going logon to one of the application instances to generate some alerts. To do this we need the public address of one of the instances. From the AWS console open the EC2 dashboard. In the left hand menu select **Instances**
 
-2. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
+1. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
 
-3. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
+1. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
 
-4. Open an SSH terminal and run
+1. Open an SSH terminal and run
+
+```
+ssh -A ec2-user@YOUR_EC@_PUBLIC_DNS
+```
+
+1. Once logged on run the following command
+
+```
+while true ; do curl 209.85.202.94 ; sleep 1 ; done
+```
+
+This will access the site we have defined as a threat.
+
+1. Go back to the GuardDuty console and select **Findings** from the left menu. After about 5 minutes you should see notifications that the bad host was accessed.
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_finding.png)
 
 </details>
 
