@@ -82,17 +82,17 @@ AWS have [a repository of custom rules here](https://github.com/awslabs/aws-conf
 
 You will now see the Rules section, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
 
-Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Noncompliant**. You can click the **Refresh** icon if you do not see the page update.
+Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Compliant**. You can click the **Refresh** icon if you do not see the page update.
 
 To see the state of the Security Groups which are being monitored for compliance, click the rule name. In our example here that is **security-workshop-restricted-common-ports**.
 
-![Noncompliant rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_non-compliant.png)
+![Noncompliant rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_compliant.png)
 
 </p></details>
 
 ### Testing the compliance state
 
-We are now going to manually remediate the rules to make sure we no longer allow port 80 through to our application since we have enabled SSL.
+We are now going to force a compliance breach by updating the rule to allow port 80 through to our application.
 
 <details>
 <summary><strong>Change a security group (expand for details)</strong></summary><p>
@@ -134,5 +134,13 @@ We are now going to manually remediate the rules to make sure we no longer allow
  
 ## GuardDuty
 
-In order to start processing events with GuardDuty we need to enable the service.
+In this section we're going to review the results we get from GuardDuty. In order to start processing events with GuardDuty we need to enable the service.
 
+</details>
+<details>
+<summary><strong>Check the Compliance breach (expand for details)</strong></summary>
+
+1. In the AWS Console open the Guard Duty Service
+
+1. Select **Get Started** and then **Enable GuardDuty**.
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)

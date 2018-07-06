@@ -56,8 +56,22 @@ Email Address []:email@example.com
 1. Copy can paste the contents of server.crt (created earlier) to **Certificate Body**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_listner_protocal.png)
 
-1. Finally we force encryption by deleting the HTTP listener. Select the **HTTP: 80** listener and select delete.
-    ![Delete HTTP listener](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_delete_listener.png)
+1. Finally we force encryption by removing port 80 from the security group.
+
+    1. In the AWS Console open the EC2 service and select **Security Groups** from the left hand menu
+
+    1. Place a check next to the **Group ID** for the **securityImmersionDay-loadBalancer**, for example
+    ![sg list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_amend.png)
+
+    1. Click **Inbound** in the ribbon below
+
+    1. Click **Edit** then click **Add Rule**
+
+    1. Delete the **HTTP** rule by clicking the cross to the right and save the config.
+        ![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_delete.png)
+
+1. Click **Save**
+<details>
 
 </p></details>
 
