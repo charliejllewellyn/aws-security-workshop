@@ -6,4 +6,4 @@ The application architecture uses [Amazon EC2](https://aws.amazon.com/ec2/), [AW
 
 See the diagram below for a description of the core infrastrure.
 
-![DVWA architecture]aws-security-workshop/images/secuirty_immersion_day.jpg
+![DVWA architecture](aws-security-workshop/images/secuirty_immersion_day.jpg)
