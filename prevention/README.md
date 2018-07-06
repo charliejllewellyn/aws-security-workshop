@@ -71,8 +71,6 @@ Email Address []:email@example.com
         ![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_delete.png)
 
 1. Click **Save**
-<details>
-
 </p></details>
 
 If you now access the DVWA over HTTPS e.g.
