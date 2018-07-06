@@ -40,13 +40,15 @@ EU (Ireland) | [![Launch AWS Security Workshop in eu-west-1](http://docs.aws.ama
 Asia Pacific (Tokyo) | [![Launch AWS Security Workshop in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=aws-security-workshop&templateURL=https://s3-eu-west-1.amazonaws.com/cjl-cloudformation-stack-templates/application_deployment.yaml)
 Asia Pacific (Sydney) | [![Launch AWS Security Workshop in ap-southeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=aws-security-workshop&templateURL=https://s3-eu-west-1.amazonaws.com/cjl-cloudformation-stack-templates/application_deployment.yaml)
 
-## DVWA configuration
+## Record stack parameters
 
-Once the stack has successfully deployed we need to login and do the intial database population. From the CloudFormation click the checkbox for the stack "aws-security-workshop" and in the ribbon below select "Output". Here you will find the URL for the DVWA.
+Once the stack has successfully deployed we need capture a couple of variables generated during the setup for use in the modules. From the CloudFormation click the checkbox for the stack "aws-security-workshop" and in the ribbon below select "Output". Here you will find the URL for the DVWA and the bucket name for S3. Record them both.
 
 ![DVWA URL](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa_url.png)
 
-Copy this url to your browser and click the "Create / Reset database" button at the bottom of the page.
+## DVWA configuration
+
+Use the DVWA url obtained above to access the site by entering it into your browser. Once the page returns click the "Create / Reset database" button at the bottom of the page.
 
 ![DVWA](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa.png)
 

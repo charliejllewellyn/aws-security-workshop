@@ -56,6 +56,9 @@ Email Address []:email@example.com
 1. Copy can paste the contents of server.crt (created earlier) to **Certificate Body**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_listner_protocal.png)
 
+1. Finally we force encryption by deleting the HTTP listener. Select the **HTTP: 80** listener and select delete.
+    ![Delete HTTP listener](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_delete_listener.png)
+
 </p></details>
 
 If you now access the DVWA over HTTPS e.g.
@@ -65,8 +68,47 @@ https://secur-loadb-1hhx56x4r3wyy-1780097981.us-east-1.elb.amazonaws.com
 ```
 
 **Note** you will recieve a certifictae warning in the browser because we used a self signed certificate which the browser will not trust.
+
 You will notice the traffic is now being served over SSL.
 
-first enabling encryption at rest for our s3 bucket file stoarge
+### Using S3 bucket policies to deny un-encrypted uploads
 
+We are going to use s3 [bucket policies] to prevent users.
 
+<details>
+<summary><strong>Create a new bucket policy (expand for details)</strong></summary><p>
+
+```
+ {
+     "Version": "2012-10-17",
+     "Id": "PutObjPolicy",
+     "Statement": [
+           {
+                "Sid": "DenyIncorrectEncryptionHeader",
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "s3:PutObject",
+                "Resource": "arn:aws:s3:::<bucket_name>/*",
+                "Condition": {
+                        "StringNotEquals": {
+                               "s3:x-amz-server-side-encryption": "AES256"
+                         }
+                }
+           },
+           {
+                "Sid": "DenyUnEncryptedObjectUploads",
+                "Effect": "Deny",
+                "Principal": "*",
+                "Action": "s3:PutObject",
+                "Resource": "arn:aws:s3:::<bucket_name>/*",
+                "Condition": {
+                        "Null": {
+                               "s3:x-amz-server-side-encryption": true
+                        }
+               }
+           }
+     ]
+ }
+```
+
+</details>
