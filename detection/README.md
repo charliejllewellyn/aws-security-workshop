@@ -106,8 +106,7 @@ We are now going to force a compliance breach by updating the rule to allow port
 
 1. Click **Edit** then click **Add Rule**
 
-1. Delete the **HTTP** rule by clicking the cross to the right and save the config.
-![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_delete.png)
+1. Click **Add rule** and select **HTTP** from the dropdown. 
 
 1. Click **Save**
 
@@ -117,12 +116,12 @@ We are now going to force a compliance breach by updating the rule to allow port
 
 1. In the AWS Console open the Config Service
 
-1. After a short period of time the Compliance state of the **security-workshop-restricted-common-ports** rule will change to **Compliant**
-    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_compliant.png)
+1. After a short period of time the Compliance state of the **security-workshop-restricted-common-ports** rule will change to **Noncompliant**
+    ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_non-compliant.png)
 
 1. Click on the **security-workshop-restricted-common-ports** rule name
 
-1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the now **Compliant** loadbalancer security group rule
+1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the now **Noncompliant** loadbalancer security group rule
 
 1. Notice the timeline which shows the changes made to the Security Group
     ![sg timeline](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_timeline.png)
@@ -136,7 +135,6 @@ We are now going to force a compliance breach by updating the rule to allow port
 
 In this section we're going to review the results we get from GuardDuty. In order to start processing events with GuardDuty we need to enable the service.
 
-</details>
 <details>
 <summary><strong>Check the Compliance breach (expand for details)</strong></summary>
 
