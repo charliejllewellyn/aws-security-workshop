@@ -111,3 +111,6 @@ Outputs:
   s3BucketName:
     Value: !Ref S3Bucket
     Description: The name of the s3 bucket
+  dwvaUrl:
+    Value: !GetAtt loadBalancer.Outputs.DNSName
+    Description: Load balancer address hosting the DVWA
