@@ -123,13 +123,12 @@ We are now going to manually remediate the rules to make sure we no longer allow
 1. Click on the **security-workshop-restricted-common-ports** rule name
 
 1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the now **Compliant** loadbalancer security group rule
-    ![sg rule shortlist](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-shortlist.png)
 
 1. Notice the timeline which shows the changes made to the Security Group
-    ![sg timeline](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/sg-rule-timeline.png)
+    ![sg timeline](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_timeline.png)
 
 1. Click on the **Change** link below the most recent change and note that it reflects the change we made earlier
-    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/sg-rule-change.png)
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/Config_sg_change.png)
 
 </details>
  
