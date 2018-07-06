@@ -1,10 +1,8 @@
-# Detection
+## Detection
 
-Detection is a common approach to understand where security controls have failed.
+Whilst prevention is a vital part of the security within AWS prevention also has the potential to impede good work slowing down delivering and frustrating users. Security teams need to be aware of when prevention is appropriate and when detection may be a better methods to track security across an organisation.
 
-In this module we will look at some practices and products that can be used to detect changes which have been made to your configurations and how to generate alerts on that basis.
-
-We'll use the following products to demonstrate these methods, AWS Config, AWS SNS, AWS CloudTrail and Amazon CloudWatch.
+In this module we will explore practices and products to detect changes and security threats and how rto generate alerts on that basis. In this module we will use [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
 
 ## Configuration State
 
@@ -145,3 +143,7 @@ We are now going to make one of our resources breach compliance.
 
 </details>
  
+## GuardDuty
+
+In order to start processing events with GuardDuty we need to enable the service.
+
