@@ -91,6 +91,7 @@ The file will upload without issue.
 1. Select the bucket name obtained when you setup the workshop
 
 1. In the S3 console select **Permissions** and then **Bucket Policy**
+  ![DVWA Security](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/s3_bucket_policy.png)
 
 1. Enter the policy below to replacing YOUR_BUCKET_NAME with your bucket name.
 
@@ -137,6 +138,8 @@ In this section we are going to use the [AWS Web Application Firewall](https://a
 
 First we'll prove the vulnerability in DVWA. Browse to the site now served over HTTPS and select **SQL Injection** form the menu on the left.
 
+**Note** you can skip the detailed steps if you are not interested in understanding the exploite and just run the last command to prove you can dump data from the database.
+
 <details>
 <summary><strong>Exploit the site (expand for details)</strong></summary><p>
 
@@ -146,7 +149,7 @@ First we'll prove the vulnerability in DVWA. Browse to the site now served over 
 1'
 ```
 
-The site responds with a SQL indicating it tried to execute what we enetered.
+The site responds with a SQL indicating it tried to execute what we entered.
 
 1. Now we'll see what information we can return
 
@@ -182,7 +185,9 @@ If we search down the list of tables we'll discover one called **users**
 1' or 1 = 1 union select null, column_name from information_schema.columns where table_name = "users"#
 ```
 
-1. Finally we'll dump some data
+</details>
+
+Finally we'll dump some data
 
 ```
 1' or 1 = 1 union select user,password from users#
@@ -192,6 +197,30 @@ This returns a list of usernames and what look like hashed passwords
 
 Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that we can exploite the site to return the password.
 
-</details>
+<details>
+<summary><strong>Setup AWS WAF to prevent SQL injection (expand for details)</strong></summary><p>
 
+1. In the AWS console open the WAF
 
+1. Select **Go to AWS WAF** under **AWS WAF**
+
+1. Click **Configure ACL** and select **Next** at the bottom of the page.
+
+1. Enter **Securtiy workshop** in "Web ACL name" and select the **region** you deployed your stack to and select the security loadbalancer as the **resource**, click **Next**
+
+1. Scroll down to **SQL injection match conditions** and choose **Create condition**
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/WAF_acl.png)
+
+1. Enter **Security workshop SQLinjection** for the **Name**
+
+1. Select **URI** for the **Part of the request to filter on** and **Convert to lowercase** for the **Transformation**, click **Add filter** and click **Create**
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/WAF_sqli.png)
+
+1. Select **Create rule** and enter **Security workshop rule**
+
+1. Under **Add conditions** change the dropdown for **match at least one of the filters in the cross-site scripting match condition** to **match at least one of the filters in the SQL injection match condition** and select the condition **Security workshop SQLinjection**, click **Create**
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/WAF_rule.png)
+
+1. Select **Allow all requests that don't match any rules**.
+
+1. Click **Review and create** and **Confirm and create**
