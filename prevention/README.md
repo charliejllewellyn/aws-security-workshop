@@ -213,7 +213,7 @@ Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that 
 
 1. Enter **Security workshop SQLinjection** for the **Name**
 
-1. Select **URI** for the **Part of the request to filter on** and **Convert to lowercase** for the **Transformation**, click **Add filter** and click **Create**
+1. Select **URI** for the **Part of the request to filter on** and **Url Decode** for the **Transformation**, click **Add filter** and click **Create**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/WAF_sqli.png)
 
 1. Select **Create rule** and enter **Security workshop rule**
