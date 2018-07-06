@@ -1,4 +1,4 @@
-# Prevention
+# Detection
 
 Detection is a common approach to understand where security controls have failed.
 
@@ -13,6 +13,13 @@ A good practice is to monitor the state change of configuration items (CI). This
 ### Using AWS Config Rules and and AWS SNS to detect configuration changes
 
 In this scenario we are going to use one of the AWS supplied configuration rules to monitor Security Group rule configuration.
+
+<details>
+<summary><strong>Setup AWS Config</strong></summary><p>
+
+PUT INITIAL CONFIG SETUP IN HERE
+
+</p></details>
 
 <details>
 <summary><strong>Create a Config Rule in AWS Config (expand for details)</strong></summary><p>
@@ -82,7 +89,7 @@ We are now going to make one of our resources breach compliance.
   * **Source** Anywhere
   * **Description** RDesktop for everything
 
-(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
+![security group rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/security-group-rule.png)
 
 1. Click **Save**
 
@@ -95,7 +102,7 @@ We are now going to make one of our resources breach compliance.
 1. After a short period of time the Compliance state of the **myOrg-security-groups-restrict-common-ports** rule will change to **1 noncompliant resource(s)**
     ![sg rule list](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-list.png)
 
-1. Click on the **myOrg-security-groups-restrict-common-ports** Rule name
+1. Click on the **myOrg-security-groups-restrict-common-ports** rule name
 
 1. In the **Resources Evaluated** section, click on the Security Group ID in the **Config Timeline** column for the **NonCompliant** resource
     ![sg rule shortlist](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/non-compliant-rule-shortlist.png)
