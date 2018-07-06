@@ -7,7 +7,7 @@ Parameters:
     Description: Project name that will be used to name and identify resoures that are created
   keyName: 
     Type: String
-    Default: cjl-aws-mac
+    AllowedPattern: ".+"
 Mappings:
   RegionMap: 
     eu-central-1:
