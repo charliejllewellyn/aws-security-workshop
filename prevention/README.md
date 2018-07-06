@@ -224,3 +224,11 @@ Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that 
 1. Select **Allow all requests that don't match any rules**.
 
 1. Click **Review and create** and **Confirm and create**
+
+</details>
+
+Attempt to re-run the exploite above and you will see your requests are denied.
+
+## Conclusion
+
+This concludes some expamples of how security policies can be enforced through prevention in the [next module](../detection), we'll look at methods and tools that can be used to detect security events within your systems.
