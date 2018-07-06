@@ -75,7 +75,7 @@ You will notice the traffic is now being served over SSL.
 
 We are going to use s3 [bucket policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) to prevent users.
 
-1. Using the cli (configured as part of the pre-reqs) upload a file to s3, for example
+First we validate we can upload un-encrypted files. Using the cli (configured as part of the pre-reqs) upload a file to s3, for example
 
 ```
 aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/
@@ -90,7 +90,9 @@ The file will upload without issue.
 
 1. Select the bucket name obtained when you setup the workshop
 
-1.  
+1. In the S3 console select **Permissions** and then **Bucket Policy**
+
+1. Enter the policy below to replacing YOUR_BUCKET_NAME with your bucket name.
 
 ```
  {
@@ -98,23 +100,11 @@ The file will upload without issue.
      "Id": "PutObjPolicy",
      "Statement": [
            {
-                "Sid": "DenyIncorrectEncryptionHeader",
-                "Effect": "Deny",
-                "Principal": "*",
-                "Action": "s3:PutObject",
-                "Resource": "arn:aws:s3:::<bucket_name>/*",
-                "Condition": {
-                        "StringNotEquals": {
-                               "s3:x-amz-server-side-encryption": "AES256"
-                         }
-                }
-           },
-           {
                 "Sid": "DenyUnEncryptedObjectUploads",
                 "Effect": "Deny",
                 "Principal": "*",
                 "Action": "s3:PutObject",
-                "Resource": "arn:aws:s3:::<bucket_name>/*",
+                "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/*",
                 "Condition": {
                         "Null": {
                                "s3:x-amz-server-side-encryption": true
@@ -126,3 +116,17 @@ The file will upload without issue.
 ```
 
 </details>
+
+Retry the validation using the CLI.
+
+```
+aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/
+```
+
+This time the request will fail with **An error occurred (AccessDenied) when calling the PutObject operation: Access Denied**.
+
+If we now request encryption as part of the upload we'll see we can successfully write to the bucket.
+
+```
+aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/ --sse
+```
