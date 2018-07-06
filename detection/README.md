@@ -42,21 +42,25 @@ AWS have [a repository of custom rules here].(https://github.com/awslabs/aws-con
 
 </p></details>
 
+<details>
+<summary><strong>Viewing the compliance state (expand for details)</strong></summary><p>
+
 You will now see the Rules section once more, with the rule you have just created added in and showing a Compliance state of **Evaluating...**.
 
-[evaluating](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-evaluating.png)
+(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-evaluating.png)
 
 Evaluation will take a couple of minutes and the UI will update to reflect the new state of **Compliant**. You can click the **Refresh** icon if you do not see the page update.
 
 To see the state of the Security Groups which are being monitored for compliance, click the rule name. In our example here that is **myOrg-security-groups-restrict-common-ports**.
 
-[compliant](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-compliant.png)
+(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-compliant.png)
 
 You will now see that we have two groups in compliance.
-[compliance-groups](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-detail-compliant.png)
+(https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/rule-detail-compliant.png)
 
+</p></details>
 
-### Testing the compliance
+### Testing the compliance state
 
 We are now going to make one of our resources breach compliance.
 
