@@ -143,12 +143,38 @@ In this section we're going to review the results we get from GuardDuty. In orde
 1. Select **Get Started** and then **Enable GuardDuty**.
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)
 
-1. In this example we're going to generate some sample findings. Click **Settings** on the left hand menu and then **Generate sample findings**
-    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)
+1. We are now going to create a fake Threat List for GuardDuty so we can force our hosts to generate events. To do this we need to change the permissions on the threat list we uploaded previously.
+
+```
+aws s3api put-object-acl --bucket YOUR_BUCKET_NAME --key securityThreatList.txt --acl public-read
+```
+
+1. In the GuardDuty console on the left menu select **Lists** 
+
+1. Select **Add a threat list**, enter a name of **SecurityWorkshop**, enter the URL formated as follows
+
+```
+https://s3.amazonaws.com/YOUR_BUCKET_NAME/securityThreatList.txt
+```
+
+and select **Plaintext** for the **Format**, finally check **I agree** and click **Add List**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_list_add.png)
+
+1. Place a check in the **Activate** box to enable the list
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_list_activate.png)
 
 </details>
 
 <details>
-<summary><strong>Evaluate the events (expand for details)</strong></summary>
+<summary><strong>Generate events (expand for details)</strong></summary>
+
+1. We are now going logon to one of the application instances to generate some alerts. To do this we need the public address of one of the instances. From the AWS console open the EC2 dashboard. In the left hand menu select **Instances**
+
+2. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
+
+3. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
+
+4. Open an SSH terminal and run
+
 </details>
 

@@ -90,7 +90,7 @@ We are going to use s3 [bucket policies](https://docs.aws.amazon.com/AmazonS3/la
 First we validate we can upload un-encrypted files. Using the cli (configured as part of the pre-reqs) upload a file to s3, for example
 
 ```
-aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/
+aws s3 cp securityThreatList.txt s3://YOUR_BUCKET_NAME/
 ```
 
 The file will upload without issue.
@@ -133,7 +133,7 @@ The file will upload without issue.
 Retry the validation using the CLI.
 
 ```
-aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/
+aws s3 cp securityThreatList.txt s3://YOUR_BUCKET_NAME/
 ```
 
 This time the request will fail with **An error occurred (AccessDenied) when calling the PutObject operation: Access Denied**.
@@ -141,7 +141,7 @@ This time the request will fail with **An error occurred (AccessDenied) when cal
 If we now request encryption as part of the upload we'll see we can successfully write to the bucket.
 
 ```
-aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/ --sse
+aws s3 cp securityThreatList.txt s3://YOUR_BUCKET_NAME/ --sse
 ```
 
 ## Web Application Firewall
