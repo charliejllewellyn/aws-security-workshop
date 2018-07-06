@@ -22,6 +22,10 @@ Many of the resources you will launch as part of this workshop are eligible for 
 
 We recommend you use the latest version of Chrome to complete this workshop.
 
+### OpenSSL client
+
+During the lab you will generate a self signed SSL certificate so need access to openssl. You can download the tool for Windows, Linux and Mac [here](https://wiki.openssl.org/index.php/Binaries).
+
 ## Application setup
 
 The application can be launched in the following regions by clicking the launch stack icons below.
