@@ -1,0 +1,113 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: securityImmersionDay
+    Description: Project name that will be used to name and identify resoures that are created
+  keyName: 
+    Type: String
+    Default: cjl-aws-mac
+Mappings:
+  RegionMap: 
+    eu-central-1:
+      "64": "ami-9a91b371"
+    eu-west-1:
+      "64": "ami-ca0135b3"
+    eu-west-2:
+      "64": "ami-c12dcda6"
+    eu-west-3:
+      "64": "ami-cae150b7"
+    sa-east-1:
+      "64": "ami-f09dcc9c"
+    us-east-2:
+      "64": "ami-976152f2"
+    us-east-1:
+      "64": "ami-467ca739"
+    us-west-1:
+      "64": "ami-46e1f226"
+    us-west-2:
+      "64": "ami-e251209a"
+    ap-northeast-1:
+      "64": "ami-92df37ed"
+    ap-northeast-2:
+      "64": "ami-efaf0181"
+    ap-northeast-3:
+      "64": "ami-b4faf4c9"
+    ap-south-1:
+      "64": "ami-b46f48db"
+    ap-southeast-1:
+      "64": "ami-de90a5a2"
+    ap-southeast-2:
+      "64": "ami-60a26a02"
+    ca-central-1:
+      "64": "ami-338a0a57"
+
+Resources:
+
+################### Create VPC to work within ###################
+
+  vpc:
+    Type: "AWS::CloudFormation::Stack"
+    Properties:
+      Tags:
+        -
+          Key: ProjectName
+          Value: !Ref ProjectName
+      TemplateURL: https://s3.amazonaws.com/cjl-cloudformation-stack-templates/vpc.yaml
+
+  autoScaleGroup:
+    Type: "AWS::CloudFormation::Stack"
+    Properties:
+      Tags:
+        -
+          Key: ProjectName
+          Value: !Ref ProjectName
+      TemplateURL: https://s3.amazonaws.com/cjl-cloudformation-stack-templates/autoScaleGroup.yaml
+      Parameters:
+        vpcId: !GetAtt vpc.Outputs.vpcId
+        subnets: !Join [ ",", [ !GetAtt vpc.Outputs.subnetAId, !GetAtt vpc.Outputs.subnetBId ] ]
+        targetgroups: !GetAtt loadBalancer.Outputs.targetgroups
+        keyName: !Ref keyName
+        DBPassword: vulnerables
+        DBServer: !GetAtt database.Outputs.DBServer
+        defaultSecurityGroup: !GetAtt vpc.Outputs.DefaultSecurityGroup
+
+  loadBalancer:
+    Type: "AWS::CloudFormation::Stack"
+    Properties:
+      Tags:
+        -
+          Key: ProjectName
+          Value: !Ref ProjectName
+      TemplateURL: https://s3.amazonaws.com/cjl-cloudformation-stack-templates/loadBalancer.yaml
+      Parameters:
+        vpcId: !GetAtt vpc.Outputs.vpcId
+        subnets: !Join [ ",", [ !GetAtt vpc.Outputs.subnetAId, !GetAtt vpc.Outputs.subnetBId ] ]
+
+  database:
+    Type: "AWS::CloudFormation::Stack"
+    Properties:
+      Tags:
+        -
+          Key: ProjectName
+          Value: !Ref ProjectName
+      TemplateURL: https://s3.amazonaws.com/cjl-cloudformation-stack-templates/rds.yaml
+      Parameters:
+        subnets: !Join [ ",", [ !GetAtt vpc.Outputs.privateSubnetAId, !GetAtt vpc.Outputs.privateSubnetBId ] ]
+        DBPassword: vulnerables
+        defaultSecurityGroup: !GetAtt vpc.Outputs.DefaultSecurityGroup
+        vpcId: !GetAtt vpc.Outputs.vpcId
+
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Tags:
+        -
+          Key: ProjectName
+          Value: !Ref ProjectName
+
+Outputs:
+  s3BucketName:
+    Value: !Ref S3Bucket
+    Description: The name of the s3 bucket
