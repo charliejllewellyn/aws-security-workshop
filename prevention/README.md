@@ -73,10 +73,24 @@ You will notice the traffic is now being served over SSL.
 
 ### Using S3 bucket policies to deny un-encrypted uploads
 
-We are going to use s3 [bucket policies] to prevent users.
+We are going to use s3 [bucket policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) to prevent users.
+
+1. Using the cli (configured as part of the pre-reqs) upload a file to s3, for example
+
+```
+aws s3 cp YOUR_FILE_NAME s3://YOUR_BUCKET_NAME/
+```
+
+The file will upload without issue.
 
 <details>
 <summary><strong>Create a new bucket policy (expand for details)</strong></summary><p>
+
+1. In the AWS Console open the S3 service console.
+
+1. Select the bucket name obtained when you setup the workshop
+
+1.  
 
 ```
  {
