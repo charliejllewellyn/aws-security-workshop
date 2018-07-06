@@ -42,6 +42,15 @@ Once the stack has successfully deployed we need to login and do the intial data
 
 ![DVWA URL](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa_url.png)
 
+Copy this url to your browser and click the "Create / Reset database" button at the bottom of the page.
+
+![DVWA](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/dvwa.png)
+
+Login with:
+
+Username: admin
+Password: password
+
 ## Modules
 
 There are four modules aligned to a common IT security lifecycle model.
