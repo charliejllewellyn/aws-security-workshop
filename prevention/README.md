@@ -42,6 +42,19 @@ To create an administrator user for yourself and add the user to an administrato
 
 You can enable your users to self-manage their own multi-factor authentication (MFA) devices and credentials. You can use the AWS Management Console to configure credentials (access keys, passwords, signing certificates, and SSH public keys) and MFA devices for your users in small numbers. But that is a task that could quickly become time consuming as the number of users grows. Security best practice specifies that users should regularly change their passwords and rotate their access keys. They should also delete or deactivate credentials that are not needed and use MFA, at the very least, for sensitive operations.
 
+To complete this lab you will need to create the folowing IAM user:- 
+
+User Name | Other instructions
+------------ | -------------
+MFAUser | Choose only the option for *AWS Management Console access*, and assign a password.
+
+
+You will also need to create the folowing group:- 
+
+Group Name | Add user as a member | Other instructions
+------------- | ------------- | -------------
+EC2MFA | MFAUser | Do NOT attach any policies or otherwise grant permissions to this group. 
+
 
 **Step 1: Create a Policy to Enforce MFA Sign-In**
 
@@ -66,7 +79,7 @@ You begin by creating an IAM customer managed policy that denies all permissions
 1. Choose the JSON tab and copy the text from the following JSON policy document. Paste this text into the JSON text box.
 
     > Note
-    > This example policy does not allow users to both sign in and perform a password change. New users and users with an expired password might try to do so. To intentionally allow this, add iam:ChangePassword and iam:CreateLoginProfile to the statement BlockMostAccessUnlessSignedInWithMFA.
+    > This example policy does not allow users to both sign in and perform a password change. New users and users with an expired password might try to do so. To intentionally allow this, add `iam:ChangePassword` and `iam:CreateLoginProfile` to the statement `BlockMostAccessUnlessSignedInWithMFA`.
 
 ```
     {
