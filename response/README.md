@@ -54,6 +54,32 @@ In this module we use Lambda as a serverless compute to automate responses to so
 1. Scroll down to the **Function Code** and replace the **lambda_function** code with the code in response/lambda/GuardDuty/lambda_function.py
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/response/Lambda_function.png)
 
+1. Under **Basic Settings** change the **Timeout** to **5 minutes**
+
 1. Click **Save**
 
 </details>
+
+## CloudWatch
+
+Building on our previous detection event in CloudWatch we're now going to configure the event to not only notify the security via SNS but also invoke the Lambda we created above. 
+
+The Lambda code will capture the name of the infected resource, take a snapshot and terminate the instance.
+
+<details>
+<summary><strong>Update CloudWatch event ton notify Lambda</strong></summary><p>
+
+1. From the AWS Console open the CloudWatch dashboard.
+
+1. Select **Events** from the left hand menu. Select the **SecurityWorkshopEventRule** event rule we created earlier and in the top right corner select **Actions** then **Edit**.
+
+1. Click **Add Target** choose **Lambda Function** and select the Lambda function we just created **securityWorkshopGuardDutyLambda**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/response/CloudWatch_trigger.png)
+
+1. Click **Configure Details** and then **Update Rule**
+
+</details>
+
+## Generate test events
+
+Follow the previous modules instructions to [Test Detection](https://github.com/charliejllewellyn/aws-security-workshop/tree/master/detection#test-detection).
