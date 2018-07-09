@@ -2,12 +2,12 @@
 
 Prevention is a common approach to enforce compliance with security controls.
 
-In this module we will look at some practices and products that can be used to enforce security by restircting actions and enforcing compliance within AWS.
+In this module we will look at some practices and products that can be used to enforce security by restricting  actions and enforcing compliance within AWS.
 
-We'll use the following products to demonstrate these methods, S3, Identity and access managment, AWS Certificate Manager, Application load balancer, Web application firewall.
+We'll use the following products to demonstrate these methods, S3, Identity and access management, AWS Certificate Manager, Application load balancer and Web application firewall.
 
-## Identity and Access Managment (IAM)
-AWS Identity and Access Management (IAM) is a web service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
+## Identity and Access Management (IAM)
+AWS Identity and Access Management (IAM) is a service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
 
 When you first create an AWS account, you begin with a single sign-in identity that has complete access to all AWS services and resources in the account. This identity is called the AWS account root user and is accessed by signing in with the email address and password that you used to create the account. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones. Instead, adhere to the best practice of using the root user only to create your first IAM user. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks. [1]
 
@@ -47,7 +47,7 @@ A good best practice is to use both encryption in transit and encryption at rest
 
 ### Using AWS Certificate Manager and Application Load Balancing to protect data in transit
 
-In this scenario we're going to use a self signed SSL certifcate however the process can be used to import offical SSL certificates or ACM can be used to generate certificates for domains you own.
+In this scenario we're going to use a self-signed SSL certificate however the process can be used to import official SSL certificates or ACM can be used to generate certificates for domains you own.
 
 <details>
 <summary><strong>Create a new certificate in AWS Certificate Manager (expand for details)</strong></summary><p>
@@ -74,21 +74,21 @@ Email Address []:email@example.com
 
 1. Select **Load Balancers** from the left hand menu
 
-1. Place a check next to the security-workshop load balancer and in the ribbon below select **Listners**
+1. Place a check next to the security-workshop load balancer and in the ribbon below select **Listeners**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_listners.png)
 
-1. Click **Add Listner**
+1. Click **Add Listener**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_listners.png)
 
-1. Change the protocal to **HTTPS**
+1. Change the protocol to **HTTPS**
 
 1. Select **Add Action**, **Forward to...** under Default Action(s) and select the security workshop target group.
 
 1. Change **Default SSL Certificate** to **Import**
 
-1. Copy can paste the contents of server.key (created earlier) to **Certificate Private Key**
+1. Copy and paste the contents of server.key (created earlier) to **Certificate Private Key**
 
-1. Copy can paste the contents of server.crt (created earlier) to **Certificate Body**
+1. Copy and paste the contents of server.crt (created earlier) to **Certificate Body**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/LB_listner_protocal.png)
 
 1. Finally we force encryption by removing port 80 from the security group.
@@ -114,7 +114,7 @@ If you now access the DVWA over HTTPS e.g.
 https://secur-loadb-1hhx56x4r3wyy-1780097981.us-east-1.elb.amazonaws.com
 ```
 
-**Note** you will recieve a certifictae warning in the browser because we used a self signed certificate which the browser will not trust.
+**Note** you will receive a certificate warning in the browser because we used a self-signed certificate which the browser will not trust.
 
 You will notice the traffic is now being served over SSL.
 
@@ -140,7 +140,7 @@ The file will upload without issue.
 1. In the S3 console select **Permissions** and then **Bucket Policy**
   ![DVWA Security](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/s3_bucket_policy.png)
 
-1. Enter the policy below to replacing YOUR_BUCKET_NAME with your bucket name.
+1. Enter the policy below, replacing YOUR_BUCKET_NAME with your bucket name.
 
 ```
  {
@@ -185,18 +185,18 @@ In this section we are going to use the [AWS Web Application Firewall](https://a
 
 First we'll prove the vulnerability in DVWA. Browse to the site now served over HTTPS and select **SQL Injection** form the menu on the left.
 
-**Note** you can skip the detailed steps if you are not interested in understanding the exploite and just run the last command to prove you can dump data from the database.
+**Note** you can skip the detailed steps if you are not interested in understanding the exploit and just run the last command to prove you can dump data from the database.
 
 <details>
 <summary><strong>Exploit the site (expand for details)</strong></summary><p>
 
-1. First we'll check if the site is vunerable to SQL injection, in the input enter the following an click submit.
+1. First we'll check if the site is vulnerable to SQL injection, in the input enter the following and click submit.
 
 ```
 1'
 ```
 
-The site responds with a SQL indicating it tried to execute what we entered.
+The site responds with a SQL error indicating it tried to execute what we entered.
 
 1. Now we'll see what information we can return
 
@@ -218,6 +218,8 @@ This generates an error showing us that the query selects 3 or less columns.
 1' order by 2#
 ```
 
+This tells us the query has two columns in.
+
 1. Lets now return the table name
 
 ```
@@ -226,15 +228,17 @@ This generates an error showing us that the query selects 3 or less columns.
 
 If we search down the list of tables we'll discover one called **users**
 
-1. We'll now see what columns are avaialble in the table
+1. We'll now see what columns are available in the table
 
 ```
 1' or 1 = 1 union select null, column_name from information_schema.columns where table_name = "users"#
 ```
 
+Here we can see a users user and password column....interesting ;-)
+
 </details>
 
-Finally we'll dump some data
+Finally, we'll dump the data
 
 ```
 1' or 1 = 1 union select user,password from users#
@@ -242,7 +246,7 @@ Finally we'll dump some data
 
 This returns a list of usernames and what look like hashed passwords
 
-Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that we can exploite the site to return the password.
+Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that we can exploit the site to return the password.
 
 <details>
 <summary><strong>Setup AWS WAF to prevent SQL injection (expand for details)</strong></summary><p>
@@ -253,7 +257,7 @@ Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that 
 
 1. Click **Configure ACL** and select **Next** at the bottom of the page.
 
-1. Enter **Securtiy workshop** in "Web ACL name" and select the **region** you deployed your stack to and select the security loadbalancer as the **resource**, click **Next**
+1. Enter **Security workshop** in "Web ACL name" and select the **region** you deployed your stack to and select the security loadbalancer as the **resource**, click **Next**
 
 1. Scroll down to **SQL injection match conditions** and choose **Create condition**
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/WAF_acl.png)
@@ -274,8 +278,8 @@ Using a site to reverse the hash such as https://md5.gromweb.com/ we prove that 
 
 </details>
 
-Attempt to re-run the exploite above and you will see your requests are denied.
+Attempt to re-run the exploit above and you will see your requests are denied.
 
 ## Conclusion
 
-This concludes some expamples of how security policies can be enforced through prevention in the [next module](../detection), we'll look at methods and tools that can be used to detect security events within your systems.
+This concludes some examples of how security policies can be enforced through prevention in the [next module](../detection), we'll look at methods and tools that can be used to detect security events within your systems.
