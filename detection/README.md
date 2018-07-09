@@ -26,11 +26,7 @@ Since a large part of detection is notifying systems and teams about events we'l
 
 </details>
 
-## Configuration State
-
-A good practice is to monitor the state change of configuration items (CI). This is helpful for change management, fault diagnosis and resolution, training, compliance and response.
-
-### Using AWS Config Rules and and AWS SNS to detect configuration changes
+## Using AWS Config Rules and and AWS SNS to detect configuration changes
 
 In this scenario we are going to use one of the AWS supplied configuration rules to monitor Security Group rule configuration; however, it is possible to build your own customer rules.
 
