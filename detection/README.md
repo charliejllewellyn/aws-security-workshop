@@ -1,12 +1,12 @@
 ## Detection
 
-Whilst prevention is a vital part of the security within AWS prevention also has the potential to impede good work slowing down delivering and frustrating users. Security teams need to be aware of when prevention is appropriate and when detection may be a better methods to track security across an organisation.
+Whilst prevention is a vital part of the security within AWS it also has the potential to impede good work, slowing down delivering and frustrating users. Security teams need to be aware of when prevention is appropriate and when detection may be a better methods to track security across an organisation.
 
-In this module we will explore practices and products to detect changes and security threats and how rto generate alerts on that basis. In this module we will use [Amazon Simple Notification Service](https://aws.amazon.com/sns/), [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
+In this module we will explore practices and products to detect changes and security threats and how to generate alerts on that basis. In this module we will use [Amazon Simple Notification Service](https://aws.amazon.com/sns/), [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
 
 ## Notification
 
-Since a large part of detection is notify systems and teams about events we'll start by setting up a notification topic.
+Since a large part of detection is notifying systems and teams about events we'll start by setting up a notification topic.
 
 <details>
 <summary><strong>Setup Amazon SNS</strong></summary><p>
@@ -28,18 +28,18 @@ Since a large part of detection is notify systems and teams about events we'll s
 
 ## Configuration State
 
-A good practice is to monitor the state change of configuration items (CI). This is helpful for change management, fault diagnosis and resolution, training, compliance and of course incident response.
+A good practice is to monitor the state change of configuration items (CI). This is helpful for change management, fault diagnosis and resolution, training, compliance and response.
 
 ### Using AWS Config Rules and and AWS SNS to detect configuration changes
 
-In this scenario we are going to use one of the AWS supplied configuration rules to monitor Security Group rule configuration.
+In this scenario we are going to use one of the AWS supplied configuration rules to monitor Security Group rule configuration; however, it is possible to build your own customer rules.
 
 <details>
 <summary><strong>Setup AWS Config</strong></summary><p>
 
 1. In the AWS Console open the Config service, ensuring that you have selected a region where the items you wish to monitor are present
 
-1. Press **Get started**
+1. Click **Get started**
     ![get started](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-get-started.png)
 
 1. The defaults are useful here but we shall add in monitoring of Identity and Access Management resources (IAM)
@@ -47,7 +47,7 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 1. Under **Resource types to record** check the tick box beside **Include global resources (e.g. AWS IAM resource)**
     ![config settings](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-settings.png)
 
-1. We shall let Config create the Amazon S3 bucket for us but we shall add in Amazon SNS notification of changes
+1. We let Config create the Amazon S3 bucket for us but add in Amazon SNS notification of changes
 
 1. Check the tick box beside **Stream configuration changes and notifications to an Amazon SNS topic.**
 
@@ -57,14 +57,14 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 
     ![config role](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-role.png)
 
-1. Press **Next**
+1. Click **Next**
 
-1. We will not choose any default rules to apply yet, so press **Next**
+1. We will not choose any default rules to apply yet, click **Next**
 
-1. On the **Review** screen check that you are satisfied and press **Confirm** if so. If not, press **Previous** to go back a screen and make changes to your satisfaction.
+1. On the **Review** screen check that you are satisfied and press **Confirm**.
     ![config confirm](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-confirm.png)
 
-1. After a short period of time, Config will be setup and you will be brought to the dashboard
+1. After a short period of time, Config will be setup and you will be brought back to the dashboard
     ![config dashboard](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/config-dash.png)
 
 </p></details>
@@ -72,13 +72,13 @@ In this scenario we are going to use one of the AWS supplied configuration rules
 <details>
 <summary><strong>Create a Config Rule in AWS Config (expand for details)</strong></summary><p>
 
-1. In the AWS Console open the Config service, ensuring that you have selected a region where the items you wish to monitor are present
+1. In the AWS Console open the Config service, ensuring that you have selected the region where the items you wish to monitor are present
 
 1. Select **Rules** from the left hand menu
 
 1. Press the **Add rule** button ![add rule](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/add-rule.png)
 
-1. Type **security group** in the search field and click the **restricted-common-ports** boxout which appears
+1. Type **security group** in the search field and click the **restricted-common-ports** card which appears
     ![restrict ports](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/restricted-common-ports.png)
 
 1. Update the **Name** to identify it as part of the workshop, **security-workshop-restricted-common-ports**
@@ -158,12 +158,12 @@ In this section we're going to review the results we get from GuardDuty. In orde
 <details>
 <summary><strong>Setup AWS GuardDuty (expand for details)</strong></summary>
 
-1. In the AWS Console open the Guard Duty Service
+1. In the AWS Console open the GuardDuty Service
 
 1. Select **Get Started** and then **Enable GuardDuty**.
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty.png)
 
-1. We are now going to create a fake Threat List for GuardDuty so we can force our hosts to generate events. To do this we need to change the permissions on the threat list we uploaded previously.
+1. We are now going to create a fake threat list for GuardDuty so we can force our hosts to generate events. To do this we need to change the permissions on the threat list we uploaded previously.
 
 ```
 aws s3api put-object-acl --bucket YOUR_BUCKET_NAME --key securityThreatList.txt --acl public-read
@@ -177,43 +177,11 @@ aws s3api put-object-acl --bucket YOUR_BUCKET_NAME --key securityThreatList.txt 
 https://s3.amazonaws.com/YOUR_BUCKET_NAME/securityThreatList.txt
 ```
 
-and select **Plaintext** for the **Format**, finally check **I agree** and click **Add List**
+select **Plaintext** for the **Format**, finally check **I agree** and click **Add List**
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_list_add.png)
 
 1. Place a check in the **Activate** box to enable the list
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_list_activate.png)
-
-</details>
-
-<details>
-<summary><strong>Generate events (expand for details)</strong></summary>
-
-1. We are now going logon to one of the application instances to generate some alerts. To do this we need the public address of one of the instances. From the AWS console open the EC2 dashboard. In the left hand menu select **Instances**
-
-1. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
-
-1. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
-    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_ec2_host.png)
-
-1. Open an SSH terminal and run
-
-```
-ssh -A ec2-user@YOUR_EC@_PUBLIC_DNS
-```
-
-1. Once logged on run the following command
-
-```
-dig GuardDutyC2ActivityB.com any
-curl -s http://com.minergate.pool/dkjdjkjdlsajdkljalsskajdksakjdksajkllalkdjsalkjdsalkjdlkasj  > /dev/null &
-curl -s http://xdn-xmr.pool.minergate.com/dhdhjkhdjkhdjkhajkhdjskahhjkhjkahdsjkakjasdhkjahdjk  > /dev/null &
-curl -s http://209.85.202.94 > /dev/null &
-```
-
-This will access the site we have defined as a threat.
-
-1. Go back to the GuardDuty console and select **Findings** from the left menu. After about 5 minutes you should see notifications that the bad host was accessed.
-    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_finding.png)
 
 </details>
 
@@ -230,7 +198,7 @@ Whilst GuardDuty is useful we really want to be in a position to notify our secu
 
 1. Click **Create Rule**
 
-1. In the **Service Name** eneter **GuardDuty** and under **Events** select **GuardDuty Finding**
+1. Click **Edit** in the **Event Pattern Preview** and enter the JSON below
 
 ```
 {
@@ -242,10 +210,54 @@ Whilst GuardDuty is useful we really want to be in a position to notify our secu
   ],
   "detail": {
     "type": [
-      "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
+      "Backdoor:EC2/C&CActivity.B!DNS"
     ]
   }
 }
 ```
+
+Click **Save**
+
+1. On the right hand side click **Add target**
+
+1. Change the dropdown from **Lambda Function** to **SNS topic**
+
+1. Enter the SNS from earlier **SecurityWorkshopEvents**
+
+1. Click **Configure Details**, enter the name **SecurityWorkshopEventRule** and click **Create Rule**
+
+</details>
+
+## Test detection
+
+<details>
+<summary><strong>Generate events to trigger GuardDuty (expand for details)</strong></summary>
+
+1. We are now going logon to one of the application instances to generate some alerts. To do this we need the public address of one of the instances. From the AWS console open the EC2 dashboard. In the left hand menu select **Instances**
+
+1. In the search enter **ProjectName** and select the tag in the value select **securityImmersionDay**. 
+
+1. Check one of the hosts and from the bottom window copy the **Public DNS (IPv4)**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_ec2_host.png)
+
+1. Open an SSH terminal and run
+
+```
+ssh -A -i LOCATION_OF_PRIVATE_KEYPAIR ec2-user@YOUR_EC@_PUBLIC_DNS
+```
+
+1. Once logged on run the following command
+
+```
+dig GuardDutyC2ActivityB.com any
+curl -s http://com.minergate.pool/dkjdjkjdlsajdkljalsskajdksakjdksajkllalkdjsalkjdsalkjdlkasj  > /dev/null &
+curl -s http://xdn-xmr.pool.minergate.com/dhdhjkhdjkhdjkhajkhdjskahhjkhjkahdsjkakjasdhkjahdjk  > /dev/null &
+curl -s http://209.85.202.94 > /dev/null &
+```
+
+This will access the site we have defined as a threat.
+
+1. Go back to the GuardDuty console and select **Findings** from the left menu. After about 5 minutes you should see notifications that the bad host was accessed.
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_finding.png)
 
 </details>
