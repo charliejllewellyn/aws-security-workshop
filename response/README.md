@@ -1,27 +1,59 @@
 ## Response
 
-Whilst prevention is a vital part of the security within AWS it also has the potential to impede good work, slowing down delivering and frustrating users. Security teams need to be aware of when prevention is appropriate and when detection may be a better methods to track security across an organisation.
+In this module we will explore practices and products to automate the response the events we detect in the previous [module](../detection). We will use [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/), [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS Config](https://aws.amazon.com/config/).
 
-In this module we will explore practices and products to detect changes and security threats and how to generate alerts on that basis. In this module we will use [Amazon Simple Notification Service](https://aws.amazon.com/sns/), [Amazon GuardDuty](https://aws.amazon.com/guardduty/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/), [AWS Config](https://aws.amazon.com/config/).
+## Lambda
 
-## Notification
-
-Since a large part of detection is notifying systems and teams about events we'll start by setting up a notification topic.
+In this module we use Lambda as a serverless compute to automate responses to some of the security notifications we configured previously. This improves the response times to for standard activies whilst still giving the visibilty we need into security operations on the platform.
 
 <details>
-<summary><strong>Setup Amazon SNS</strong></summary><p>
+<summary><strong>Setup GuardDuty Lambda</strong></summary><p>
 
-1. From the AWS Console open the SNS dashboard.
+1. From the AWS Console open the Lambda dashboard.
 
-1. Click **Create Topic**
-    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/SNS_topic.png)
+1. Click **Create a function**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/response/Lambda.png)
 
-1. For the **Topic Name** enter **SecurityWorkshopEvents** and click **Create Topic**
+1. Update the **Name** with **securityWorkshopGuardDutyLambda**
 
-1. Click **Create subscription**
+1. Select **Python 3.6** as the **runtime**
 
-1. Change the **protocol** to **Email** and enter your email address, click **Create subscription**
+1. Under **Role** select **Create custom role**
 
-1. Check your email and click the confirmation to complete the topic setup
+1. On the IAM page that opens select **View Policy Document** and click **edit**, click **OK** to acknoweldge reading the documentation
+
+1. Enter the following policy:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Action": "ec2:*",
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+1. Click **Allow**
+
+1. When you are returned to the Lambda console click **Create Function**
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/response/Lambda_setup.png)
+
+1. Scroll down to the **Function Code** and replace the **lambda_function** code with the code in response/lambda/GuardDuty/lambda_function.py
+    ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/response/Lambda_function.png)
+
+1. Click **Save**
 
 </details>

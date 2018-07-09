@@ -1,0 +1,111 @@
+{
+  "version": "0",
+  "id": "6a7e8feb-b491-4cf7-a9f1-bf3703467718",
+  "detail-type": "EC2 Instance State-change Notification",
+  "source": "aws.ec2",
+  "account": "111122223333",
+  "time": "2017-12-22T18:43:48Z",
+  "region": "us-west-1",
+  "resources": [
+    "arn:aws:ec2:us-west-1:123456789012:instance/ i-1234567890abcdef0"
+  ],
+  "detail": {
+    "schemaVersion": "2.0",
+    "accountId": "008369042577",
+    "region": "us-east-1",
+    "partition": "aws",
+    "id": "9cb23f1045960059d513fbca6ddfa23c",
+    "arn": "arn:aws:guardduty:us-east-1:008369042577:detector/ceb0d90e1953495af4d0effa07357bf4/finding/9cb23f1045960059d513fbca6ddfa23c",
+    "type": "Backdoor:EC2/C&CActivity.B!DNS",
+    "resource": {
+      "resourceType": "Instance",
+      "instanceDetails": {
+        "instanceId": "i-0609f6fcd57f5d40a",
+        "instanceType": "t2.micro",
+        "launchTime": "2018-07-06T13:04:51Z",
+        "platform": null,
+        "productCodes": [],
+        "iamInstanceProfile": null,
+        "networkInterfaces": [
+          {
+            "networkInterfaceId": "eni-0b042ed3282020b13",
+            "privateIpAddresses": [
+              {
+                "privateDnsName": "ip-10-0-0-11.ec2.internal",
+                "privateIpAddress": "10.0.0.11"
+              }
+            ],
+            "subnetId": "subnet-00b875c9ed559d5c1",
+            "vpcId": "vpc-0a1fcda2616342729",
+            "privateDnsName": "ip-10-0-0-11.ec2.internal",
+            "securityGroups": [
+              {
+                "groupName": "default",
+                "groupId": "sg-01ff739678700eeda"
+              },
+              {
+                "groupName": "securityImmersionDay-autoScaleGroup-VCG4ON5U7BGW-securityGroup-1WCL0ESKY52FO",
+                "groupId": "sg-09bba454537a3b7ef"
+              }
+            ],
+            "publicIp": "34.205.131.7",
+            "ipv6Addresses": [],
+            "publicDnsName": "ec2-34-205-131-7.compute-1.amazonaws.com",
+            "privateIpAddress": "10.0.0.11"
+          }
+        ],
+        "tags": [
+          {
+            "value": "securityImmersionDay-autoScaleGroup-VCG4ON5U7BGW-ASG1-1RFI3JA14J20G",
+            "key": "aws:autoscaling:groupName"
+          },
+          {
+            "value": "securityImmersionDay",
+            "key": "ProjectName"
+          },
+          {
+            "value": "ASG1",
+            "key": "aws:cloudformation:logical-id"
+          },
+          {
+            "value": "arn:aws:cloudformation:us-east-1:008369042577:stack/securityImmersionDay-autoScaleGroup-VCG4ON5U7BGW/18262e40-80ed-11e8-b4b5-50fae583d0fe",
+            "key": "aws:cloudformation:stack-id"
+          },
+          {
+            "value": "securityImmersionDay-autoScaleGroup-VCG4ON5U7BGW",
+            "key": "aws:cloudformation:stack-name"
+          }
+        ],
+        "instanceState": "running",
+        "availabilityZone": "us-east-1a",
+        "imageId": "ami-467ca739",
+        "imageDescription": "Amazon Linux AMI 2018.03.0.20180412 x86_64 HVM GP2"
+      }
+    },
+    "service": {
+      "serviceName": "guardduty",
+      "detectorId": "ceb0d90e1953495af4d0effa07357bf4",
+      "action": {
+        "actionType": "DNS_REQUEST",
+        "dnsRequestAction": {
+          "domain": "guarddutyc2activityb.com",
+          "protocol": "UDP",
+          "blocked": false
+        }
+      },
+      "resourceRole": "TARGET",
+      "additionalInfo": {
+        "threatListName": "TestDomain"
+      },
+      "eventFirstSeen": "2018-07-09T08:00:26Z",
+      "eventLastSeen": "2018-07-09T08:03:26Z",
+      "archived": false,
+      "count": 14
+    },
+    "severity": 8,
+    "createdAt": "2018-07-09T08:20:19.372Z",
+    "updatedAt": "2018-07-09T09:44:03.079Z",
+    "title": "Command and Control server domain name queried by EC2 instance i-0609f6fcd57f5d40a.",
+    "description": "EC2 instance i-0609f6fcd57f5d40a is querying a domain name associated with a known Command & Control server."
+  }
+}
