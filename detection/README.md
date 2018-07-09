@@ -256,4 +256,8 @@ This will access the site we have defined as a threat.
 1. Go back to the GuardDuty console and select **Findings** from the left menu. After about 5 minutes you should see notifications that the bad host was accessed.
     ![sg change](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/detection/GuardDuty_finding.png)
 
+1. Finally go to your email to view the notification generate by CloudWatch to notify the team of the threat.
+
 </details>
+
+This concludes the detection module, in the [next](../response) module we'll look at how we can start to respond to events raised via the mechanisms shown above.
