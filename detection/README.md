@@ -204,7 +204,10 @@ ssh -A ec2-user@YOUR_EC@_PUBLIC_DNS
 1. Once logged on run the following command
 
 ```
-while true ; do curl 209.85.202.94 ; sleep 1 ; done
+dig GuardDutyC2ActivityB.com any
+curl -s http://com.minergate.pool/dkjdjkjdlsajdkljalsskajdksakjdksajkllalkdjsalkjdsalkjdlkasj  > /dev/null &
+curl -s http://xdn-xmr.pool.minergate.com/dhdhjkhdjkhdjkhajkhdjskahhjkhjkahdsjkakjasdhkjahdjk  > /dev/null &
+curl -s http://209.85.202.94 > /dev/null &
 ```
 
 This will access the site we have defined as a threat.
@@ -214,3 +217,35 @@ This will access the site we have defined as a threat.
 
 </details>
 
+## CloudWatch
+
+Whilst GuardDuty is useful we really want to be in a position to notify our security team or systems rather than checking an interface. To aid with this we'll setup a CloudWatch event to notify the SNS topic we created earlier to alert the security team.
+
+<details>
+<summary><strong>Generate events (expand for details)</strong></summary>
+
+1. From the EC2 console open the CloudWatch dashboard.
+
+1. Click on **Rules** in the left menu
+
+1. Click **Create Rule**
+
+1. In the **Service Name** eneter **GuardDuty** and under **Events** select **GuardDuty Finding**
+
+```
+{
+  "source": [
+    "aws.guardduty"
+  ],
+  "detail-type": [
+    "GuardDuty Finding"
+  ],
+  "detail": {
+    "type": [
+      "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
+    ]
+  }
+}
+```
+
+</details>
