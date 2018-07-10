@@ -206,7 +206,7 @@ Whilst GuardDuty is useful we really want to be in a position to notify our secu
   ],
   "detail": {
     "type": [
-      "Backdoor:EC2/C&CActivity.B!DNS"
+      "UnauthorizedAccess:EC2/MaliciousIPCaller.Custom"
     ]
   }
 }
