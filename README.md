@@ -77,9 +77,13 @@ In the left hand menu select **DVWA Security**, in the dropdown select **Low** a
 
 ## Modules
 
-There are four modules aligned to a common IT security lifecycle model.
+The workshop has been modelled around a common pattern for security lifecycle.
 
-1. [Prevention](prevention)
-2. [Detection](detection)
-3. [Response](response)
-4. [Analysis](analysis)
+<p align="center">
+  <img width="300" src="https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/secuirty_lifecycle.png">
+</p>
+
+1. [Prevention](prevention) - common techniques to enforce desired controls in AWS
+2. [Detection](detection) - products that help monitor and surface information about security and change across AWS
+3. [Response](response) - techniques to automatically remmdiate against information surfaced through detection 
+4. [Analysis](analysis) - techniques to audit information gathered across AWS

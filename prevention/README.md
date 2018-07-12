@@ -9,9 +9,14 @@ We'll use the following products to demonstrate these methods, S3, Identity and 
 ## Identity and Access Management (IAM)
 AWS Identity and Access Management (IAM) is a service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
 
+### Creating users
+
 When you first create an AWS account, you begin with a single sign-in identity that has complete access to all AWS services and resources in the account. This identity is called the AWS account root user and is accessed by signing in with the email address and password that you used to create the account. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones. Instead, adhere to the best practice of using the root user only to create your first IAM user. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks. [1]
 
 [1] - https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html
+
+<details>
+<summary><strong>Create your first user (expand for details)</strong></summary><p>
 
 First we will need to create an IAM User:- 
 
@@ -38,11 +43,16 @@ To create an administrator user for yourself and add the user to an administrato
 
 1. Choose Next: Review to see the list of group memberships to be added to the new user. When you are ready to proceed, choose Create user.
 
+</details>
+
 ### Using MFA with IAM and enableing Users to Self Serve
 
 You can enable your users to self-manage their own multi-factor authentication (MFA) devices and credentials. You can use the AWS Management Console to configure credentials (access keys, passwords, signing certificates, and SSH public keys) and MFA devices for your users in small numbers. But that is a task that could quickly become time consuming as the number of users grows. Security best practice specifies that users should regularly change their passwords and rotate their access keys. They should also delete or deactivate credentials that are not needed and use MFA, at the very least, for sensitive operations.
 
-To complete this lab you will need to create the folowing IAM user:- 
+<details>
+<summary><strong>Create a policy enforce MFA (expand for details)</strong></summary><p>
+
+To complete this lab you will need to create the following IAM user:- 
 
 User Name | Other instructions
 ------------ | -------------
