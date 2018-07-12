@@ -276,6 +276,8 @@ In this part of the tutorial, you sign in as the test user and verify that the p
 
 1. Choose EC2 to open the Amazon EC2 console again. Note that this time you can see all the information and perform any actions you want. If you go to any other console as this user, you see access denied messages because the policies in this tutorial grant access only to Amazon EC2.
 
+</details>
+
 ## Encryption
 
 A good best practice is to use both encryption in transit and encryption at rest. Whilst the details about how to enforce this may change between AWS products the approach to protect data remains consistent.
