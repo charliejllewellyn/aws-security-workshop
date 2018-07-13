@@ -49,7 +49,7 @@ Whilst this is a forced example it shows how system and infrastructure logs can 
 CloudTrail allows us to record and query all API requests made to the AWS Service APIs. In this case we are going to look at any events recorded that might give insight into actions taken against our instances.
 
 <details>
-<summary><strong>Review logs (expand for details)</strong></summary><p>
+<summary><strong>Query CloudTrail logs (expand for details)</strong></summary><p>
 
 1. From the AWS Console open the CloudTrail dashboard
 
@@ -61,6 +61,49 @@ CloudTrail allows us to record and query all API requests made to the AWS Servic
 
 1. This returns a list of all API actions listed against the resource.
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudTrail_event_filtering.png)
+
+</details>
+
+## Athena
+
+Athena is an AWS service that allows us to query data stored in S3. CloudTrail logs data to S3 which means we can configure a schema that allows us to write more complex queries to interigate the data.
+
+<details>
+<summary><strong>Configure Athena to query CloudTrail logs (expand for details)</strong></summary><p>
+
+1. From the AWS Console open the CloudTrail dashboard
+
+1. From the left hand menu select **Event History**
+
+1. Click **Run advanced queries in Amazon Athena**
+
+1. Select the **securityimmersionday-s3Bucket-xxxxxxxxxx** as the Storage Location
+
+1. Click **Create Table**
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/Athena_table.png)
+
+1. Click **Go to Athena**
+
+1. Click **Get Started**
+
+1. In the Query window enter the following updating the query with your table name and your instance id
+
+```
+WITH newdata AS (
+  select 
+    eventtime, 
+    resources as resource, 
+    useridentity,
+    eventname,
+    requestparameters
+    
+  from YOUR_ATHENA_TABLE_NAME where cardinality(resources) >= 1
+  )
+  select eventtime, eventname, useridentity, requestparameters, resource from newdata where resource[1].arn like '%YOUR_INSTANCE_ID%'
+```
+
+1. This will return the actions taken against the instance as well as the paraemeters of the calls
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/Athena_query.png)
 
 </details>
 
