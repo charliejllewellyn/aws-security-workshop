@@ -26,3 +26,24 @@ It is also possible to capture [custom metrics](https://docs.aws.amazon.com/Amaz
 
 1. Click into the log group and then into the log stream and you will see a list of all shell commands executed on the server.
     ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudWatch_log.png)
+
+1. The CloudFormation also enables VPC flow logs when setting up the infrastructure which allows us to query the packets sent and recieved by the server. Click on **Logs** again in the left hand menu and enter **securityGroupVpcFlowLogs** in the filter
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudWatch_flowlog_filter.png)
+
+1. Click into the log group and click **Search Log Group**
+
+1. Enter **209.85.202.94** in the filter to return a list of packets matching the IP
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudWatch_flowlog.png)
+
+1. Click the **eni-xxxxxxxxxx** to the right under **Show in stream**
+
+1. This returns the highlighted packet in context of the rest of the stream and just above we can see the IP address of the user that connected shortly before the command was executed.
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudWatch_flowlog.png)
+
+</details>
+
+Whilst this is a forced example it shows how system and infrastructure logs can be easily aggregated to start building a picture of exactly what was going on around the time of the event. It is also possible to stream the logs to other tools like splunk or (Elasticsearch)[https://aws.amazon.com/elasticsearch-service/] to visulaise the data.
+
+##CloudTrail
+
+CloudTrail allows us to record and query all API requests made to the AWS Service APIs. It means we can 
