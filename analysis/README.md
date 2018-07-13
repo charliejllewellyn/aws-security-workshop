@@ -44,7 +44,7 @@ It is also possible to capture [custom metrics](https://docs.aws.amazon.com/Amaz
 
 Whilst this is a forced example it shows how system and infrastructure logs can be easily aggregated to start building a picture of exactly what was going on around the time of the event. It is also possible to stream the logs to other tools like splunk or (Elasticsearch)[https://aws.amazon.com/elasticsearch-service/] to visulaise the data.
 
-##CloudTrail
+## CloudTrail
 
 CloudTrail allows us to record and query all API requests made to the AWS Service APIs. In this case we are going to look at any events recorded that might give insight into actions taken against our instances.
 
