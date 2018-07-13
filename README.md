@@ -80,7 +80,7 @@ In the left hand menu select **DVWA Security**, in the dropdown select **Low** a
 The workshop has been modelled around a common pattern for security lifecycle.
 
 <p align="center">
-  <img width="300" src="https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/secuirty_lifecycle.png">
+  <img width="300" src="https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/security_lifecycle.png">
 </p>
 
 1. [Prevention](prevention) - common techniques to enforce desired controls in AWS
