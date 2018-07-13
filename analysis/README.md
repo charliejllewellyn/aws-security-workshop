@@ -46,4 +46,26 @@ Whilst this is a forced example it shows how system and infrastructure logs can 
 
 ##CloudTrail
 
-CloudTrail allows us to record and query all API requests made to the AWS Service APIs. It means we can 
+CloudTrail allows us to record and query all API requests made to the AWS Service APIs. In this case we are going to look at any events recorded that might give insight into actions taken against our instances.
+
+<details>
+<summary><strong>Review logs (expand for details)</strong></summary><p>
+
+1. From the AWS Console open the CloudTrail dashboard
+
+1. From the left hand menu select **Event History**
+
+1. In the filter dropdown select **Resource Name**
+
+1. In the Enter lookup value enter the resource id of the instance obtained above, e.g. "i-036c394ba8fe4cd39"
+
+1. This returns a list of all API actions listed against the resource.
+    ![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/analysis/CloudTrail_event_filtering.png)
+
+</details>
+
+# Summary
+
+This concludes the workshop. We have learnt about different AWS products that can support various stages of the security lifecycle.
+
+The suggested next steps would be review the risks that have been highlighted during the security review of the platform and start thinking about how the products and methodologies we have used during the workshop could be used to control the risks that are highlighted.
