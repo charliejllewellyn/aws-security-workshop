@@ -9,6 +9,8 @@ We'll use the following products to demonstrate these methods, S3, Identity and 
 ## Identity and Access Management (IAM)
 AWS Identity and Access Management (IAM) is a service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
 
+In this section we will implement the recommendations in the [CIS Whitepaper](https://d0.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) to secure access to AWS.
+
 ### Creating users
 
 When you first create an AWS account, you begin with a single sign-in identity that has complete access to all AWS services and resources in the account. This identity is called the AWS account root user and is accessed by signing in with the email address and password that you used to create the account. We strongly recommend that you do not use the root user for your everyday tasks, even the administrative ones. Instead, adhere to the best practice of using the root user only to create your first IAM user. Then securely lock away the root user credentials and use them to perform only a few account and service management tasks. [1]
@@ -275,6 +277,31 @@ In this part of the tutorial, you sign in as the test user and verify that the p
 1. Sign out of the console and then sign in as MFAUser again. This time AWS prompts you for an MFA code from your phone. When you get it, type the code in the box and then choose Submit.
 
 1. Choose EC2 to open the Amazon EC2 console again. Note that this time you can see all the information and perform any actions you want. If you go to any other console as this user, you see access denied messages because the policies in this tutorial grant access only to Amazon EC2.
+
+</details>
+
+### Set a password policy
+
+Password policies are used to enforce password standards to ensure users implement a strong password to protect their account.
+
+<details>
+<summary><strong>Configure a password policy (expand for details)</strong></summary>
+
+1. Use your AWS account email address and password to sign in as the AWS account root user to the IAM console at https://console.aws.amazon.com/iam/.
+
+1. In the navigation pane on the left, choose **Account Settings**
+
+1. Set **Minimum password length:** to **14**
+
+1. Place a check agaist, **Require at least one uppercase letter, Require at least one lowercase letter, Require at least one number, Require at least one non-alphanumeric character, Enable password expiration, Prevent password reuse**
+
+1. Enter **90** in **Password expiration period (in days):**
+
+1. Enter **24** in **Number of passwords to remember:**
+
+1. Click **Apply Password Policy**
+![provision certificates](https://github.com/charliejllewellyn/aws-security-workshop/blob/master/images/IAM_password_policy.png)
+
 
 </details>
 

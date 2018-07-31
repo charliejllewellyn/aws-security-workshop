@@ -1,6 +1,6 @@
 # AWS Security Workshop
 
-In this workshop we will deploy a simple ethical hacking application that enables users to explore vulnerabilities. The deployment uses [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to deploy the [Damn Vulnerable Web Application (DVWA)](http://www.dvwa.co.uk/).
+This workshop will guide you through four modules building up a multi-stage protection stratgey. Each module builds on the previous module to provide an understanding of how AWS security services can be used to provide holistic controls encompassing the entire security lifecycle. We will deploy a simple ethical hacking application that enables users to explore vulnerabilities. The deployment uses [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to deploy the [Damn Vulnerable Web Application (DVWA)](http://www.dvwa.co.uk/).
 
 The application architecture uses [Amazon EC2](https://aws.amazon.com/ec2/), [AWS Auto Scaling](https://aws.amazon.com/autoscaling/) and [Amazon Relational Database Service (Amazon RDS)](https://aws.amazon.com/rds/).
 
