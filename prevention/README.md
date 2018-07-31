@@ -9,7 +9,7 @@ We'll use the following products to demonstrate these methods, S3, Identity and 
 ## Identity and Access Management (IAM)
 AWS Identity and Access Management (IAM) is a service that helps you securely control access to AWS resources. You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources. 
 
-In this section we will implement the recommendations in the [CIS Whitepaper](https://d0.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) to secure access to AWS.
+In this section we will implement a number of the recommendations in the [CIS Whitepaper](https://d0.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) to secure access to AWS. For a complete list please consult the whitepaper directly.
 
 ### Creating users
 
