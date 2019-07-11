@@ -20,7 +20,7 @@
     "resource": {
       "resourceType": "Instance",
       "instanceDetails": {
-        "instanceId": "i-0609f6fcd57f5d40a",
+        "instanceId": "i-0cfa95df85c8cb7c6",
         "instanceType": "t2.micro",
         "launchTime": "2018-07-06T13:04:51Z",
         "platform": null,
@@ -105,7 +105,7 @@
     "severity": 8,
     "createdAt": "2018-07-09T08:20:19.372Z",
     "updatedAt": "2018-07-09T09:44:03.079Z",
-    "title": "Command and Control server domain name queried by EC2 instance i-0609f6fcd57f5d40a.",
-    "description": "EC2 instance i-0609f6fcd57f5d40a is querying a domain name associated with a known Command & Control server."
+    "title": "Command and Control server domain name queried by EC2 instance i-0cfa95df85c8cb7c6.",
+    "description": "EC2 instance i-0cfa95df85c8cb7c6 is querying a domain name associated with a known Command & Control server."
   }
 }

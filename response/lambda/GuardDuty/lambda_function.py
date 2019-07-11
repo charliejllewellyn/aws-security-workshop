@@ -15,7 +15,7 @@ def snapShotInstance(instanceId):
     InstanceId=instanceId
     )
     volumeId = response['BlockDeviceMappings'][0]['Ebs']['VolumeId']
-    snapshot = ec2.create_snapshot(VolumeId=volumeId, Description='Security Workshop Example')
+    snapshot = ec2.create_snapshot(VolumeId=volumeId, Description='Security Workshop Example', TagSpecifications=[{'ResourceType': 'snapshot', 'Tags': [{ 'Key': 'ProjectName', 'Value': 'securityImmersionDay' }]}])
     snapshot.load()
     while snapshot.state != 'completed':
         print(snapshot.progress)

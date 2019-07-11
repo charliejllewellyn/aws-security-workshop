@@ -99,6 +99,73 @@ Resources:
         defaultSecurityGroup: !GetAtt vpc.Outputs.DefaultSecurityGroup
         vpcId: !GetAtt vpc.Outputs.vpcId
 
+  cloudTrailRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - 
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "cloudtrail.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+
+  cloudTrailPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyDocument:
+
+        Version: '2012-10-17'
+        Statement:
+        - Sid: AWSCloudTrailCreateLogStream2014110
+          Effect: Allow
+          Action:
+          - logs:CreateLogStream
+          Resource:
+          - !GetAtt cloudWatchLogGroup.Arn
+        - Sid: AWSCloudTrailPutLogEvents20141101
+          Effect: Allow
+          Action:
+          - logs:PutLogEvents
+          Resource:
+          - !GetAtt cloudWatchLogGroup.Arn
+      PolicyName: cloudTrailPolicy
+      Roles:
+      - !Ref cloudTrailRole
+
+  BucketPolicy: 
+    Type: "AWS::S3::BucketPolicy"
+    Properties: 
+      Bucket: !Ref S3Bucket
+      PolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Sid: "AWSCloudTrailAclCheck"
+            Effect: "Allow"
+            Principal: 
+              Service: "cloudtrail.amazonaws.com"
+            Action: "s3:GetBucketAcl"
+            Resource: 
+              !Sub |-
+                arn:aws:s3:::${S3Bucket}
+          - 
+            Sid: "AWSCloudTrailWrite"
+            Effect: "Allow"
+            Principal: 
+              Service: "cloudtrail.amazonaws.com"
+            Action: "s3:PutObject"
+            Resource:
+              !Sub |-
+                arn:aws:s3:::${S3Bucket}/AWSLogs/${AWS::AccountId}/*
+            Condition: 
+              StringEquals:
+                s3:x-amz-acl: "bucket-owner-full-control"
+
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -106,6 +173,23 @@ Resources:
         -
           Key: ProjectName
           Value: !Ref ProjectName
+
+  cloudWatchLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties: 
+      LogGroupName: securityWorkshopCloudTrail
+      RetentionInDays: 30
+
+  cloudTrail: 
+    DependsOn: 
+      - BucketPolicy
+      - cloudTrailPolicy
+    Type: "AWS::CloudTrail::Trail"
+    Properties: 
+      S3BucketName: !Ref S3Bucket
+      IsLogging: true
+      CloudWatchLogsRoleArn: !GetAtt cloudTrailRole.Arn
+      CloudWatchLogsLogGroupArn: !GetAtt cloudWatchLogGroup.Arn
 
 Outputs:
   s3BucketName:

@@ -47,6 +47,8 @@ To create an administrator user for yourself and add the user to an administrato
 
 </details>
 
+**Note:** A common approach to further increase security is tocreate two custom policies, one that can only create permissions and one that can only assign permissions, assign them to two dedicated roles to be used for user and permissions management by different people/teams. This way you introduce a dual-man rule for any permissions change, peventing individuals from being able to assign permissions.
+
 ### Using MFA with IAM and enableing Users to Self Serve
 
 You can enable your users to self-manage their own multi-factor authentication (MFA) devices and credentials. You can use the AWS Management Console to configure credentials (access keys, passwords, signing certificates, and SSH public keys) and MFA devices for your users in small numbers. But that is a task that could quickly become time consuming as the number of users grows. Security best practice specifies that users should regularly change their passwords and rotate their access keys. They should also delete or deactivate credentials that are not needed and use MFA, at the very least, for sensitive operations.
@@ -442,6 +444,23 @@ If we now request encryption as part of the upload we'll see we can successfully
 ```
 aws s3 cp securityThreatList.txt s3://YOUR_BUCKET_NAME/ --sse
 ```
+
+### Using AWS Key Management Service (KMS) to encrypt buckets
+
+There are multiple options for encrypting data in S3. In the example above we choose the native S3 serverside encryption (sse). However, it is possible to also use KMS to encrypt data in S3 as well as client side encryption. 
+
+KMS encryption offers additional protection beyond the default S3 encryption as the user not only needs access to the bucket but also access to the KMS key to decrypt the data. In the scenario that a bucket was mistakenly made public, if the default S3 sse was used S3 would automatically decrypt the content requested via an https request to an anoymous web user. However, if KMS was used the anoymous user accessing the (now) public content would not have permissions to access the key and the request would be denied. 
+
+Furthermore if client side encyption was used the result would be the same. Clientside encryption can offer additional protection but also complicates the configuration and storage of data in S3 and introduces complexity for the application owners to manage encyption keys.
+
+<details>
+<summary><strong>Create a new KMS key for S3 (expand for details)</strong></summary>
+
+1. Use your AWS account email address and password to sign in as the AWS account root user to the IAM console at https://console.aws.amazon.com/iam/.
+
+1. 
+
+</details>
 
 ## Web Application Firewall
 
